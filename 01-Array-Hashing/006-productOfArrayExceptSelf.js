@@ -22,7 +22,7 @@ Output: [0,0,9,0,0]
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-  let result = [];
+  // let result = [];
   // for (let i = 0; i < nums.length; i++) {
   //     let product = 1
   //     for (let j = 0; j < nums.length; j++) {
@@ -34,9 +34,14 @@ var productExceptSelf = function(nums) {
   //     result.push(product)
   // }
 
+  let product = 1
   for (let i = 0; i < nums.length; i++) {
-      let product = 1
       product *= nums[i]
   }
-  return result
+  let result = new Array(4).fill(product)
+  for (let j = 0; j < result.length; j++) {
+    result[j] /= nums[j];
+  }
+  return result;
 };
+console.log(productExceptSelf([1,2,3,4]));
