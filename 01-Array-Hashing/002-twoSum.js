@@ -29,13 +29,23 @@ Output: [0,1]
  */
 var twoSum = function(nums, target) {
   let storage = {};
+
+  if (!nums.length) {
+    return false;
+  }
+
   storage[nums[0]] = 0;
 
   for (let i = 1; i < nums.length; i++) {
+    //Checks if in storage. 0 comes back as false so therefore must check if there is a number
       if (typeof storage[target - nums[i]] === "number") {
           return [storage[target-nums[i]], i]
       }
       storage[nums[i]] = i
   }
 
+  return false;
 };
+
+console.log(twoSum([2,7,11,15], 9))
+console.log(twoSum([3,2,4], 6))
