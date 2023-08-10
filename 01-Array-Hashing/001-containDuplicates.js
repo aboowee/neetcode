@@ -22,8 +22,8 @@ Output: true
 var containsDuplicate = function(nums) {
     let storage = {}
     for (let i = 0; i < nums.length; i++) {
-    //   if (typeof storage[nums[i]] === "number") {
-    if (storage[nums[i]]) {
+    //Checks for 0 in duplicates because if just checking storage[nums[i]], 0 comes back as false
+      if (typeof storage[nums[i]] === "number") {
           return true
       } else {
           storage[nums[i]]=nums[i]
