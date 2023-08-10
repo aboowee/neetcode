@@ -22,7 +22,8 @@ Output: true
 var containsDuplicate = function(nums) {
     let storage = {}
     for (let i = 0; i < nums.length; i++) {
-      if (typeof storage[nums[i]] === "number") {
+    //   if (typeof storage[nums[i]] === "number") {
+    if (storage[nums[i]]) {
           return true
       } else {
           storage[nums[i]]=nums[i]
@@ -30,3 +31,5 @@ var containsDuplicate = function(nums) {
     }
     return false
 };
+
+console.log(containsDuplicate([1,2,3,4,1]))
