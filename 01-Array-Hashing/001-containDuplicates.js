@@ -19,17 +19,33 @@ Output: true
  * @param {number[]} nums
  * @return {boolean}
  */
+// var containsDuplicate = function(nums) {
+//     let storage = {}
+//     for (let i = 0; i < nums.length; i++) {
+//     //Checks for 0 in duplicates because if just checking storage[nums[i]], 0 comes back as false
+//       if (typeof storage[nums[i]] === "number") {
+//           return true
+//       } else {
+//           storage[nums[i]]=nums[i]
+//       }
+//     }
+//     return false
+// };
+
 var containsDuplicate = function(nums) {
-    let storage = {}
-    for (let i = 0; i < nums.length; i++) {
-    //Checks for 0 in duplicates because if just checking storage[nums[i]], 0 comes back as false
-      if (typeof storage[nums[i]] === "number") {
-          return true
-      } else {
-          storage[nums[i]]=nums[i]
-      }
+    //Output - Boolean
+    //Input - Integer Array
+    //Constraint
+    //Edge Cases - Empty array
+    let storage = {};
+    for (let num of nums) {
+        if (storage[num]) {
+            return true;
+        } else {
+            storage[num] = 1;
+        }
     }
-    return false
+    return false;
 };
 
 console.log(containsDuplicate([1,2,3,4,1]))
