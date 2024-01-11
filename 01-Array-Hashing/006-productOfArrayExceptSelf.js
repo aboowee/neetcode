@@ -33,15 +33,44 @@ var productExceptSelf = function(nums) {
   //     }
   //     result.push(product)
   // }
+  // return result;
 
-  let product = 1
-  for (let i = 0; i < nums.length; i++) {
-      product *= nums[i]
+  //Input is numbers array
+  //Output is array of numbers excluding self
+  //Constraint is O(n) without division operator
+
+  //Create an object tracking index
+  const n = nums.length;
+  const result = new Array(n).fill(1);
+  // [1, 1, 1, 1]
+  let leftProduct = 1;
+  let rightProduct = 1;
+
+  for (let i = 0; i < n; i++) {
+  // [1, 1, 1, 1]
+  // [1, 3, 1, 1]
+  // [1, 3, 12, 1]
+  // [1, 3, 12, 60]
+      result[i] *= leftProduct;
+      leftProduct *= nums[i];
+  // 3
+  // 12
+  // 60
   }
-  let result = new Array(4).fill(product)
-  for (let j = 0; j < result.length; j++) {
-    result[j] /= nums[j];
+
+  for (let i = n - 1; i >= 0; i--) {
+  // [1, 3, 12, 60]
+  // [1, 3, 72, 60]
+  // [1, 90, 72, 60]
+  // [120, 90, 72, 60]
+      result[i] *= rightProduct;
+      rightProduct *= nums[i];
+  // 6
+  // 30
+  // 120
   }
+
   return result;
+  // [120, 90, 72, 60]
 };
-console.log(productExceptSelf([1,2,3,4]));
+console.log(productExceptSelf([3,4,5,6]));
