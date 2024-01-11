@@ -41,16 +41,32 @@ var topKFrequent = function(nums, k) {
 //   }
 //   return result
 
-let storage = new Map();
-for (let num of nums) {
-    if (!storage.get(num)) {
-        storage.set(num, 1);
-    } else {
-        storage.set(num, storage.get(num) + 1)
+
+    //Input is array of numbers, top # of frequent numbers
+    //Output is array of top frequent numbers
+
+    //Iterate through array and count how many times a number shows up
+    //Sort the array by highest count
+    //Return [topFrequents] ? Array push by K
+
+    let countStorage = {};
+    for (num of nums) {
+        if (!countStorage[num]) {
+            countStorage[num] = 1;
+        } else {
+            countStorage[num]++;
+        }
     }
-}
-storage.forEach((item, key) => {console.log(item, key)})
-console.log(storage);
+
+    let sorted = Object.entries(countStorage).sort((a,b) => {
+        return b[1] - a[1];
+    })
+
+    let result = [];
+    for (let i = 0; i < k; i++) {
+        result.push(sorted[i][0]);
+    }
+    return result;
 };
 
 console.log(topKFrequent([1,1,1,2,2,3,3], 2))
