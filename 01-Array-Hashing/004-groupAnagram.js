@@ -23,29 +23,50 @@ Output: [["a"]]
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function(strs) {
+// var groupAnagrams = function(strs) {
+//   //Input is an array of strings
+//   //Output is an array of array of anagrams
+//   let storage = {};
+
+//   for (let str of strs) {
+//       let sorted = str.split('').sort().join('')
+//       if (!storage[sorted]) {
+//           storage[sorted] = [str];
+//       } else {
+//           storage[sorted].push(str)
+//       }
+//   }
+
+//   return Object.values(storage)
+
+//   //Create storage
+//     //Iterate through string array
+//       //Iterate through storage
+//         //Check if current array string is an anagram with storage string
+//         //If so, add to that storage
+//         //If not, set that storage
+
+//   //Return storage in correct format
+
+// };
+
+function groupAnagrams(strs) {
   //Input is an array of strings
-  //Output is an array of array of anagrams
-  let storage = {};
+  //Output is nested array of anagram strings
+
+let storage = new Map();
 
   for (let str of strs) {
-      let sorted = str.split('').sort().join('')
-      if (!storage[sorted]) {
-          storage[sorted] = [str];
-      } else {
-          storage[sorted].push(str)
-      }
+    let sorted = str.split('').sort().join('');
+    if (!storage.has(sorted)) {
+      storage.set(sorted, [str]);
+    } else {
+      storage.get(sorted).push(str);
+    }
   }
 
-  return Object.values(storage)
+  return [...storage.values()];
+}
 
-  //Create storage
-    //Iterate through string array
-      //Iterate through storage
-        //Check if current array string is an anagram with storage string
-        //If so, add to that storage
-        //If not, set that storage
-
-  //Return storage in correct format
-
-};
+console.log("Working");
+console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
