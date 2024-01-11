@@ -52,7 +52,9 @@ var productExceptSelf = function(nums) {
   // [1, 3, 12, 1]
   // [1, 3, 12, 60]
       result[i] *= leftProduct;
+      //Ignoring current index pretty much
       leftProduct *= nums[i];
+      //Multiply by current index for next multiplication
   // 3
   // 12
   // 60
