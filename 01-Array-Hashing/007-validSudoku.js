@@ -42,49 +42,91 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
  * @param {character[][]} board
  * @return {boolean}
  */
-var isValidSudoku = function(board, once = true) {
-  //Column Check
-  for (let i = 0; i < board[0].length; i++) {
-      let column = board.map(row => row[i])
-      if (!rowCheck(column)) {
-        return false
-      }
-  }
-  //Row Check
-  for (let j = 0; j < board.length; j++) {
-      if (!rowCheck(board[j])) {
-          return false
-      }
-  }
-  //Box Check
-  if (once) {
-      for (let k = 0; k < board[0].length; k+=3) {
-          for (let l = 0; l < board.length; l+=3) {
-              let box = board.slice(k, k+3)
-              subBox = box.map(row => {
-                  return row.slice(l, l+3)
-              })
-              if (!isValidSudoku(subBox, false)) {
-                  return false
-              }
-          }
-      }
-  }
+// var isValidSudoku = function(board, once = true) {
+//   //Column Check
+//   for (let i = 0; i < board[0].length; i++) {
+//       let column = board.map(row => row[i])
+//       if (!rowCheck(column)) {
+//         return false
+//       }
+//   }
+//   //Row Check
+//   for (let j = 0; j < board.length; j++) {
+//       if (!rowCheck(board[j])) {
+//           return false
+//       }
+//   }
+//   //Box Check
+//   if (once) {
+//       for (let k = 0; k < board[0].length; k+=3) {
+//           for (let l = 0; l < board.length; l+=3) {
+//               let box = board.slice(k, k+3)
+//               subBox = box.map(row => {
+//                   return row.slice(l, l+3)
+//               })
+//               if (!isValidSudoku(subBox, false)) {
+//                   return false
+//               }
+//           }
+//       }
+//   }
 
-  return true
-};
+//   return true
+// };
 
-var rowCheck = function (row) {
-let storage = {};
-for (let item of row) {
-    if (item === ".") {
-        continue
+// var rowCheck = function (row) {
+// let storage = {};
+// for (let item of row) {
+//     if (item === ".") {
+//         continue
+//     }
+//     if (storage[item]) {
+//         return false
+//     } else {
+//         storage[item] = item
+//     }
+// }
+// return true
+// }
+
+function isValidSudoku(board) {
+    //Input array x9 nested in array x9
+    //Output boolean if board is valid
+
+    for (let i = 0; i < board.length; i++) {
+        let row = {};
+        let column = {};
+        let subBox = {};
+
+        for (let j = 0; j < board[0].length; j++) {
+            let rowPosition = board[i][j];
+            let columnPosition = board[j][i];
+            let subBoardPosition = board[3 * Math.floor(i/3) + Math.floor(j/3)][3 * i%3 + j%3]
+
+            if (rowPosition !== ".") {
+                if (row[rowPosition]) {
+                    return false
+                }
+                row[rowPosition] = true;
+            }
+
+            if (columnPosition !== ".") {
+                if (column[columnPosition]) {
+                    return false;
+                 }
+                 column[columnPosition];
+            }
+
+            if (subBoardPosition !== ".") {
+                if (subBox[subBoardPositionPosition]) {
+                    return false;
+                 }
+                 subBox[subBoardPosition];
+            }
+        }
     }
-    if (storage[item]) {
-        return false
-    } else {
-        storage[item] = item
-    }
+
+    return true;
 }
-return true
-}
+
+console.log(isValidSudoku([["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]))
