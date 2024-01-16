@@ -41,3 +41,33 @@ var isValid = function(s) {
   }
   return false
 };
+
+var isValid = function(s) {
+
+    //Iterate through string, and store bracket
+    //If encountering a close bracket, check if last stack item is the opening
+      //If so, remove and continue
+      //If not, return false
+    //Check if stack is empty at end
+    let stack = [];
+    let brackets = {
+        ")": "(",
+        "]": "[",
+        "}": "{"
+    };
+
+    for (let bracket of s) {
+        if (!brackets[bracket]) {
+            stack.push(bracket);
+        } else if (brackets[bracket] === stack.pop()) {
+            continue;
+        } else {
+            return false;
+        }
+    }
+
+    return stack.length ? false : true;
+
+  };
+
+  console.log(isValid("()"));
