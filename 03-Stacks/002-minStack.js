@@ -32,6 +32,55 @@ minStack.top();    // return 0
 minStack.getMin(); // return -2
 */
 
+// var MinStack = function() {
+//   this.stack = [];
+//   this.min = [];
+// };
+
+// /**
+// * @param {number} val
+// * @return {void}
+// */
+// MinStack.prototype.push = function(val) {
+//   this.stack.push(val)
+//   if (!this.min.length || this.min[this.min.length-1] >= val) {
+//       this.min.push(val)
+//   }
+// };
+
+// /**
+// * @return {void}
+// */
+// MinStack.prototype.pop = function() {
+//   let popped = this.stack.pop()
+//   if (popped === this.min[this.min.length-1]) {
+//       this.min.pop()
+//   }
+// };
+
+// /**
+// * @return {number}
+// */
+// MinStack.prototype.top = function() {
+//   return this.stack.length ? this.stack[this.stack.length-1]: null;
+// };
+
+// /**
+// * @return {number}
+// */
+// MinStack.prototype.getMin = function() {
+//   return this.min[this.min.length-1];
+// };
+
+/**
+* Your MinStack object will be instantiated and called as such:
+* var obj = new MinStack()
+* obj.push(val)
+* obj.pop()
+* var param_3 = obj.top()
+* var param_4 = obj.getMin()
+*/
+
 var MinStack = function() {
   this.stack = [];
   this.min = [];
@@ -42,9 +91,9 @@ var MinStack = function() {
 * @return {void}
 */
 MinStack.prototype.push = function(val) {
-  this.stack.push(val)
-  if (!this.min.length || this.min[this.min.length-1] >= val) {
-      this.min.push(val)
+  this.stack.push(val);
+  if (!this.min.length || val <= this.min[this.min.length-1]) {
+    this.min.push(val);
   }
 };
 
@@ -52,31 +101,21 @@ MinStack.prototype.push = function(val) {
 * @return {void}
 */
 MinStack.prototype.pop = function() {
-  let popped = this.stack.pop()
-  if (popped === this.min[this.min.length-1]) {
-      this.min.pop()
-  }
+  if (this.stack.pop() === this.min[this.min.length - 1]) {
+    this.min.pop();
+  };
 };
 
 /**
 * @return {number}
 */
 MinStack.prototype.top = function() {
-  return this.stack.length ? this.stack[this.stack.length-1]: null;
+  return this.stack[this.stack.length - 1];
 };
 
 /**
 * @return {number}
 */
 MinStack.prototype.getMin = function() {
-  return this.min[this.min.length-1];
+  return this.min.length ? this.min[this.min.length - 1] : null;
 };
-
-/**
-* Your MinStack object will be instantiated and called as such:
-* var obj = new MinStack()
-* obj.push(val)
-* obj.pop()
-* var param_3 = obj.top()
-* var param_4 = obj.getMin()
-*/
