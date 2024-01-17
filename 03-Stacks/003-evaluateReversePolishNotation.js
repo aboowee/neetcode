@@ -41,5 +41,29 @@ Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
  * @return {number}
  */
 var evalRPN = function(tokens) {
+  //Input is string of operands and expressions
+  //Output is a number (result)
+  //Constraints
+  let stack = [];
+  let checker = {
+    "+": true,
+    "-": true,
+    "/": true,
+    "*": true
+  };
 
+  for (let token of tokens) {
+    if (checker[token]) {
+      let second = stack.pop();
+      let first = stack.pop();
+      stack.push(Math.trunc(eval(`${first} ${token} ${second}`)));
+    } else {
+      stack.push(token);
+    }
+  }
+
+  return stack[0];
 };
+
+// console.log(evalRPN(["2","1","+","3","*"]));
+console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]));
