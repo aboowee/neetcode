@@ -40,10 +40,8 @@ Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
  * @param {string[]} tokens
  * @return {number}
  */
+/*
 var evalRPN = function(tokens) {
-  //Input is string of operands and expressions
-  //Output is a number (result)
-  //Constraints
   let stack = [];
   let checker = {
     "+": true,
@@ -64,6 +62,29 @@ var evalRPN = function(tokens) {
 
   return stack[0];
 };
+*/
+var evalRPN = function(tokens) {
+  let stack = [];
+  let first, second;
+  let operands = {
+    "+": (x,y) => (x+y),
+    "-": (x,y) => (x-y),
+    "*": (x,y) => (x*y),
+    "/": (x,y) => (Math.trunc(x/y))
+  }
 
-// console.log(evalRPN(["2","1","+","3","*"]));
+  for (let token of tokens) {
+    if (operands[token]) {
+      second = parseInt(stack.pop());
+      first = parseInt(stack.pop());
+      stack.push(operands[token](first,second));
+    } else {
+      stack.push(token);
+    }
+  }
+
+  return stack[0];
+};
+
+console.log(evalRPN(["2","1","+","3","*"]));
 console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]));
