@@ -20,5 +20,28 @@ Output: [1,1,0]
  * @return {number[]}
  */
 var dailyTemperatures = function(temperatures) {
+  let daysUntilWarmerTemp = [];
+  let dayTracker = 1;
+
+  for (let i = 0; i < temperatures.length; i++) {
+    for (let j = i + 1; j < temperatures.length; j++) {
+      if (temperatures[j] > temperatures[i]) {
+        daysUntilWarmerTemp.push(dayTracker)
+        dayTracker = 1;
+        break;
+      } else {
+        dayTracker++
+      }
+    }
+    if (!daysUntilWarmerTemp[i]) {
+      daysUntilWarmerTemp.push(0);
+      dayTracker = 1;
+    }
+  }
+
+  return daysUntilWarmerTemp
 
 };
+
+console.log(dailyTemperatures([73,74,75,71,69,72,76,73]));
+console.log(dailyTemperatures([30,40,50,60]));
