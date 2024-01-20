@@ -25,18 +25,26 @@ var generateParenthesis = function(n) {
 
   //Opening and closing parenthesis must equal n
   let result = [];
-  let combination = "";
+  let combination = [];
 
   function combinationCreator (openIncr, closeIncr) {
-      if (openIncr === closeIncr === n) {
-        return combination;
+      if (openIncr === closeIncr && openIncr === n) {
+        result.push(combination.join(""));
       }
       if (openIncr < n) {
-        combination += '('
+        combination.push('(');
         combinationCreator(openIncr + 1, closeIncr);
+        combination.pop();
+      }
+      if (closeIncr < openIncr) {
+        combination.push(')');
+        combinationCreator(openIncr, closeIncr + 1);
+        combination.pop();
       }
     }
-  }
+
+  combinationCreator(0,0);
+  return result;
 
 };
 
