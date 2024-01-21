@@ -53,24 +53,26 @@ var carFleet = function(target, position, speed) {
   //Slower gets pushed to stack
   //Monotonic decreasing
 
-
-  let stack = [[position[0], speed[0]]];
+  let sorted = position.map((pos, index) => [pos, speed[index]]).sort((a,b)=>a[0]-b[0]);
+  let stack = [[sorted[0][0], sorted[0][1]]];
   let steps;
   let currentPos;
   let popped;
 
-  for (let i = 1; i < position.length; i++) {
-    steps = Math.abs((stack[stack.length-1][0] - position[i]) / (stack[stack.length-1][1] - speed[i]));
-    currentPos = steps * speed[i] + position[i];
+  for (let i = sorted.length - 1; i > 0; i--) {
+    steps = Math.abs((stack[stack.length-1][0] - sorted[i][0]) / (stack[stack.length-1][1] - sorted[i][1]));
+    currentPos = steps * sorted[i][1] + sorted[i][0];
     if (currentPos <= target) {
       popped = stack.pop();
-      stack.push([currentPos, Math.min(popped[1], speed[i])]);
+      stack.push([currentPos, Math.min(popped[1], sorted[i][1])]);
     } else {
-      stack.push([position[i], speed[i]]);
+      stack.push([sorted[i][0], sorted[i][1]]);
     }
   }
 
   return stack.length;
 };
+
+//Can make efficient by calculating time to finish rather than steps. But moving to next problem
 
 console.log(carFleet(12, [10,8,0,5,3], [2,4,1,1,3]));
