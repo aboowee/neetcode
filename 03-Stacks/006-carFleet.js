@@ -48,9 +48,29 @@ var carFleet = function(target, position, speed) {
   //Check (target - position) / speed
   //Lower number = faster
   //As soon as faster car catches up to slower, goes slower speed
+
   //Algebra for position? 5x + 10 = 3x + 20, x = 10 steps
+  //Slower gets pushed to stack
+  //Monotonic decreasing
 
 
-  let stack = [];
+  let stack = [[position[0], speed[0]]];
+  let steps;
+  let currentPos;
+  let popped;
 
+  for (let i = 1; i < position.length; i++) {
+    steps = Math.abs((stack[stack.length-1][0] - position[i]) / (stack[stack.length-1][1] - speed[i]));
+    currentPos = steps * speed[i] + position[i];
+    if (currentPos <= target) {
+      popped = stack.pop();
+      stack.push([currentPos, Math.min(popped[1], speed[i])]);
+    } else {
+      stack.push([position[i], speed[i]]);
+    }
+  }
+
+  return stack.length;
 };
+
+console.log(carFleet(12, [10,8,0,5,3], [2,4,1,1,3]));
