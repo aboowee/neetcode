@@ -19,5 +19,26 @@ Output: 4
  * @return {number}
  */
 var largestRectangleArea = function(heights) {
+  //input is array of heights
+  //output is largest area
 
+  //Calc area from 0 to n heights
+  //Redo from i+1 to n heights
+  let maxArea = 0;
+  let maxHeight = 0;
+
+  for (let i = 0; i < heights.length; i++) {
+    maxHeight = heights[i];
+    maxArea = Math.max(maxHeight, maxArea);
+    for (let j = i + 1; j < heights.length; j++) {
+      maxHeight = Math.min(heights[j], maxHeight);
+      maxArea = Math.max(maxHeight*(j-i+1), maxArea);
+    }
+  }
+  return maxArea;
 };
+
+console.log(largestRectangleArea([2,1,5,6,2,3]));
+console.log(largestRectangleArea([2,4]));
+console.log(largestRectangleArea([0,9]));
+console.log(largestRectangleArea([0,2,0]));
