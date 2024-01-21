@@ -19,27 +19,43 @@ Output: [1,1,0]
  * @param {number[]} temperatures
  * @return {number[]}
  */
+// var dailyTemperatures = function(temperatures) {
+//   let daysUntilWarmerTemp = [];
+//   let dayTracker = 1;
+
+//   for (let i = 0; i < temperatures.length; i++) {
+//     for (let j = i + 1; j < temperatures.length; j++) {
+//       if (temperatures[j] > temperatures[i]) {
+//         daysUntilWarmerTemp.push(dayTracker)
+//         dayTracker = 1;
+//         break;
+//       } else {
+//         dayTracker++
+//       }
+//     }
+//     if (!daysUntilWarmerTemp[i]) {
+//       daysUntilWarmerTemp.push(0);
+//       dayTracker = 1;
+//     }
+//   }
+
+//   return daysUntilWarmerTemp;
+
+// };
+
 var dailyTemperatures = function(temperatures) {
-  let daysUntilWarmerTemp = [];
-  let dayTracker = 1;
+  let daysUntilWarmerTemp = new Array(temperatures.length).fill(0);
+  let stackTracker = [];
 
   for (let i = 0; i < temperatures.length; i++) {
-    for (let j = i + 1; j < temperatures.length; j++) {
-      if (temperatures[j] > temperatures[i]) {
-        daysUntilWarmerTemp.push(dayTracker)
-        dayTracker = 1;
-        break;
-      } else {
-        dayTracker++
-      }
+    while (stackTracker.length && stackTracker[stackTracker.length-1][1] < temperatures[i]) {
+      [stackIndex, stackValue] = stackTracker.pop();
+      daysUntilWarmerTemp[stackIndex] = i - stackIndex
     }
-    if (!daysUntilWarmerTemp[i]) {
-      daysUntilWarmerTemp.push(0);
-      dayTracker = 1;
-    }
+    stackTracker.push([i, temperatures[i]]);
   }
 
-  return daysUntilWarmerTemp
+return daysUntilWarmerTemp;
 
 };
 
