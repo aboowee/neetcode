@@ -49,30 +49,22 @@ var carFleet = function(target, position, speed) {
   //Lower number = faster
   //As soon as faster car catches up to slower, goes slower speed
 
-  //Algebra for position? 5x + 10 = 3x + 20, x = 10 steps
-  //Slower gets pushed to stack
-  //Monotonic decreasing
+  //Sort by position descending (car in front)
+  //Calc for time, target - position / speed = time
+  //If the time is shorter to get to target, do not keep value (will go same speed as the one in front of it)
 
-  let sorted = position.map((pos, index) => [pos, speed[index]]).sort((a,b)=>a[0]-b[0]);
-  let stack = [[sorted[0][0], sorted[0][1]]];
-  let steps;
-  let currentPos;
-  let popped;
+  let sorted = position.map((pos, index) => [pos, speed[index]]).sort((a,b)=>b[0]-a[0]);
+  let stack = [];
 
-  for (let i = sorted.length - 1; i > 0; i--) {
-    steps = Math.abs((stack[stack.length-1][0] - sorted[i][0]) / (stack[stack.length-1][1] - sorted[i][1]));
-    currentPos = steps * sorted[i][1] + sorted[i][0];
-    if (currentPos <= target) {
-      popped = stack.pop();
-      stack.push([currentPos, Math.min(popped[1], sorted[i][1])]);
-    } else {
-      stack.push([sorted[i][0], sorted[i][1]]);
+  for (let i = 0; i < sorted.length; i++) {
+    stack.push((target - sorted[i][0]) / sorted[i][1]);
+    if (stack.length >= 2 && stack[stack.length-1] <= stack[stack.length-2]) {
+      stack.pop();
     }
   }
 
   return stack.length;
 };
 
-//Can make efficient by calculating time to finish rather than steps. But moving to next problem
-
 console.log(carFleet(12, [10,8,0,5,3], [2,4,1,1,3]));
+console.log(carFleet(10, [3], [3]));
