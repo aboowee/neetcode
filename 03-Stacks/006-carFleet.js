@@ -41,5 +41,16 @@ Then, the fleet (speed 2) and the car starting at 4 (speed 1) become one fleet, 
  * @return {number}
  */
 var carFleet = function(target, position, speed) {
+  //Input is array of positions, array of speeds, target destination number
+  //Output is number of fleets
+  //Any # of cars can be a fleet
+
+  //Check (target - position) / speed
+  //Lower number = faster
+  //As soon as faster car catches up to slower, goes slower speed
+  //Algebra for position? 5x + 10 = 3x + 20, x = 10 steps
+
+
+  let stack = [];
 
 };
