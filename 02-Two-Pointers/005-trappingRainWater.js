@@ -25,13 +25,16 @@ var trap = function(height) {
   let left = 0;
   let right = 2;
 
-  while (left <= height.length - 3) {
-    while (right <= height.length - 1 && height[right] < height[left] && right > left + 1) {
+  while (left <= height.length - 2) {
+    while (right <= height.length - 1 && right > left + 1) {
       if (height[right-1] > height[left]) {
         left = right - 1;
       }
       if (height[right-1] < height[left]) {
         currentArea += height[left] - height[right - 1];
+      }
+      if (height[right] >= height[left]) {
+        break;
       }
       if (right === height.length - 1 && height[right] < height[left]) {
         currentArea = 0;
