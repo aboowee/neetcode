@@ -25,24 +25,42 @@ Output: 1
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function(height) {
-  let maxVolume = 0;
-  let volume = 0;
-  let start = 0;
-  let end = height.length-1;
+// var maxArea = function(height) {
+//   let maxVolume = 0;
+//   let volume = 0;
+//   let start = 0;
+//   let end = height.length-1;
 
-  while (start < end) {
-      //Multiple start height * end height * index difference to get volume
-      //If higher than current Max, replace
-      volume = Math.min(height[start], height[end]) * (end - start);
-      if (volume > maxVolume) {
-          maxVolume = volume
-      }
-      if (height[start] >= height[end]) {
-          end--
-      } else {
-          start++
-      }
-  }
-  return maxVolume
-};
+//   while (start < end) {
+//       //Multiple start height * end height * index difference to get volume
+//       //If higher than current Max, replace
+//       volume = Math.min(height[start], height[end]) * (end - start);
+//       if (volume > maxVolume) {
+//           maxVolume = volume
+//       }
+//       if (height[start] >= height[end]) {
+//           end--
+//       } else {
+//           start++
+//       }
+//   }
+//   return maxVolume
+// };
+
+var maxArea = function(height) {
+    let maxVolume = 0;
+    let start = 0;
+    let end = height.length - 1;
+
+    while (start < end) {
+        maxVolume = Math.max(maxVolume, Math.min(height[start], height[end]) * (end - start));
+        if (height[start] > height[end]) {
+            end--;
+        } else {
+            start++;
+        }
+    }
+    return maxVolume;
+  };
+
+  console.log(maxArea([1,8,6,2,5,4,8,3,7]));
