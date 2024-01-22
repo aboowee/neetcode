@@ -20,5 +20,37 @@ Output: 9
  * @return {number}
  */
 var trap = function(height) {
+  let totalArea = 0;
+  let currentArea = 0;
+  let left = 0;
+  let right = 2;
 
+  while (left <= height.length - 3) {
+    while (right <= height.length - 1 && height[right] < height[left] && right > left + 1) {
+      if (height[right-1] > height[left]) {
+        left = right - 1;
+      }
+      if (height[right-1] < height[left]) {
+        currentArea += height[left] - height[right - 1];
+      }
+      if (right === height.length - 1 && height[right] < height[left]) {
+        currentArea = 0;
+        right = left + 1;
+        break;
+      }
+      right++;
+    }
+    left = right;
+    right+= 2;
+    totalArea += currentArea;
+    currentArea = 0;
+    //Keep moving right pointer hitting equal or higher height
+      //Get the max height (math.min perimeters) and iterate between to add
+    //Start becomes end. For each start, keep making end go until equal or higher OR to end
+  }
+
+  return totalArea;
 };
+
+console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
+console.log(trap([4,2,0,3,2,5]));
