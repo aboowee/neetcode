@@ -19,31 +19,56 @@ Output: 9
  * @param {number[]} height
  * @return {number}
  */
+// var trap = function(height) {
+//   let totalArea = 0;
+//   let leftMax = 0;
+//   let rightMax = 0;
+
+//   for (let i = 0; i < height.length; i++) {
+//     let j = i;
+//     while (j < height.length) {
+//       if (height[j] > rightMax) {
+//         rightMax = height[j];
+//       }
+//       j++;
+//     }
+//     j = i;
+//     while (j >= 0) {
+//       if (height[j] > leftMax) {
+//         leftMax = height[j];
+//       }
+//       j--;
+//     }
+//     totalArea += Math.min(rightMax, leftMax) - height[i];
+//     leftMax = 0;
+//     rightMax = 0;
+//   }
+
+//   return totalArea;
+// };
+
 var trap = function(height) {
   let totalArea = 0;
-  let leftMax = 0;
-  let rightMax = 0;
+  let left = 0, right = height.length-1;
+  let leftMax = 0, rightMax = 0;
 
-  for (let i = 0; i < height.length; i++) {
-    let j = i;
-    while (j < height.length) {
-      if (height[j] > rightMax) {
-        rightMax = height[j];
+  while (left <= right) {
+    if (height[left] <= height[right]) {
+      if (height[left] > leftMax) {
+        leftMax = height[left];
+      } else {
+        totalArea += leftMax - height[left];
       }
-      j++;
-    }
-    j = i;
-    while (j >= 0) {
-      if (height[j] > leftMax) {
-        leftMax = height[j];
+      left++;
+    } else {
+      if (height[right] > rightMax) {
+        rightMax = height[right];
+      } else {
+        totalArea += rightMax - height[right];
       }
-      j--;
+      right--;
     }
-    totalArea += Math.min(rightMax, leftMax) - height[i];
-    leftMax = 0;
-    rightMax = 0;
   }
-
   return totalArea;
 };
 
