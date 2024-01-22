@@ -31,23 +31,46 @@ Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We ret
  * @param {number} target
  * @return {number[]}
  */
+// var twoSum = function(numbers, target) {
+
+//   //Input = array of numbers, target number
+//   //Output = Array of index + 1 of 2 sums
+//   //Constraints = Increasing order, 1 solution, o(1) extra space
+
+//       let left = 0, right = numbers.length -1;
+
+//       while(left < right) {
+//          let sum = numbers[left] + numbers[right];
+//          if(sum === target) {
+//              return [left+1, right +1]
+//          }else if( sum > target) {
+//              right--
+//          }else {
+//              left++
+//          }
+//       }
+//       return [-1,-1]
+//   };
+
+
 var twoSum = function(numbers, target) {
+    let left = 0;
+    let right = numbers.length - 1;
+    let total;
 
-  //Input = array of numbers, target number
-  //Output = Array of index + 1 of 2 sums
-  //Constraints = Increasing order, 1 solution, o(1) extra space
+    while (left < right) {
+        total = numbers[left] + numbers[right];
+        if (total === target) {
+            return [left+1, right+1];
+        } else if (total > target) {
+            right--;
+        } else if (total < target) {
+            left++;
+        }
+    }
+    return [-1, -1];
+};
 
-      let left = 0, right = numbers.length -1;
-
-      while(left < right) {
-         let sum = numbers[left] + numbers[right];
-         if(sum === target) {
-             return [left+1, right +1]
-         }else if( sum > target) {
-             right--
-         }else {
-             left++
-         }
-      }
-      return [-1,-1]
-  };
+console.log(twoSum([2,7,11,15], 9));
+console.log(twoSum([2,3,4], 6));
+console.log(twoSum([-1,0], -1));
