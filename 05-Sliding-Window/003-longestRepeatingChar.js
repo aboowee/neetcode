@@ -32,5 +32,43 @@ s consists of only uppercase English letters.
  * @return {number}
  */
 var characterReplacement = function(s, k) {
+  //Input: string of letters and Number of letters that can be replaced
+  //Output: longest substring containing same letter
 
+  //LOGIC
+    //Initiate current longest string
+    //Initiate left
+    //Iterate through string
+      //Maybe a while loop for each index until hits k times
+        //If current index matched last, increase longest string
+        //If not, replace to match last index
+
+  let longestString = 0;
+  let currentCounter = 1;
+  let right = 0;
+  let replaced = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    right = i + 1;
+    while (replaced <= k && right < s.length) {
+      if (s[right] !== s[i]) {
+        replaced++;
+        if (replaced > k) {
+          break;
+        }
+        currentCounter++;
+      } else {
+        currentCounter++;
+      }
+      right++;
+    }
+    longestString = Math.max(longestString, currentCounter);
+    currentCounter = 1;
+    replaced = 0;
+  }
+
+  return longestString;
 };
+
+console.log(characterReplacement("ABAB", 2));
+console.log(characterReplacement("AABABBA", 1));
