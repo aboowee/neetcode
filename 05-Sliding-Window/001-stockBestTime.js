@@ -32,4 +32,25 @@ Constraints:
  */
 var maxProfit = function(prices) {
 
+  let max = 0;
+  let currentMinimum = prices[0];
+  let windowStart = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    //Iterate through stocks
+    //Keep track of minimum before current value. Check if minimum value is less than current
+      //Calc max profit between current minimum and current value. If more, max
+    if (prices[windowStart] < currentMinimum) {
+      currentMinimum = prices[windowStart];
+    }
+    if (prices[i] > currentMinimum) {
+      max = Math.max(max, prices[i] - currentMinimum);
+    }
+    windowStart++;
+  }
+
+  return max;
 };
+
+console.log(maxProfit([7,1,5,3,6,4]));
+console.log(maxProfit([7,6,4,3,1]));
