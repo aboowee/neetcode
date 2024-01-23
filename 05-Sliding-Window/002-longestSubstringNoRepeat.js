@@ -34,5 +34,34 @@ s consists of English letters, digits, symbols and spaces.
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
+  //LOGIC
+    //Iterate through string
+    //Check If unique with substring left to i,
+      //If unique, increase count for unique
+      //If not unique, max unique is equal to unique counter and unique counter becomes 0
+  if (!s.length) {
+    return 0;
+  }
 
+  let uniqueTracker = {};
+  let maxUnique = 0;
+  let start = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    while (uniqueTracker[s[i]]) {
+      delete uniqueTracker[s[start]];
+      start++;
+    }
+      uniqueTracker[s[i]] = 1;
+      maxUnique = Math.max(maxUnique, i - start + 1);
+
+  }
+
+  return maxUnique;
 };
+
+console.log(lengthOfLongestSubstring("abcabcbb"));
+console.log(lengthOfLongestSubstring("bbbbbb"));
+console.log(lengthOfLongestSubstring("pwwkew"));
+console.log(lengthOfLongestSubstring("aab"));
+console.log(lengthOfLongestSubstring("dvdf"));
