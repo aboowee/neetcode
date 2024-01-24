@@ -109,19 +109,19 @@ var checkInclusion = function(s1, s2) {
     }
 
     if (right - left === s1.length) {
-      if (neededChar[s2[left]] >= 0) {
+      neededChar[s2[left]]++;
+      if (neededChar[s2[left]] > 0) {
         requiredLength++;
       }
-      neededChar[s2[left]]++;
       left++;
     }
   }
-  // If match was not found we return false
+
 return false;
 };
 
 
-// console.log(checkInclusion("ab", "eidbaooo"));
-// console.log(checkInclusion("ab", "eidboaoo"));
-// console.log(checkInclusion("ab", "ba"));
+console.log(checkInclusion("ab", "eidbaooo"));
+console.log(checkInclusion("ab", "eidboaoo"));
+console.log(checkInclusion("ab", "ba"));
 console.log(checkInclusion("adc", "dcda"));
