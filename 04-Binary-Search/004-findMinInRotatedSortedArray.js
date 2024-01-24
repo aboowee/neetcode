@@ -30,6 +30,43 @@ Explanation: The original array was [11,13,15,17] and it was rotated 4 times
  * @param {number[]} nums
  * @return {number}
  */
-var findMin = function(nums) {
 
+
+var findMin = function(nums) {
+  //Input is a rotated array
+  //Output is minimum value in array
+  //Constraint - must be in O(logn) time complexity
+
+  //LOGIC
+    //Look at middle value
+    //IF middle is higher than left, search right
+    //ELSE search left
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    let min = nums[0];
+
+    while (start <= end) {
+      let mid = ~~((start+end)/2);
+
+      if (nums[end] > nums[start]) {
+        min = Math.min(min, nums[start]);
+        break;
+      }
+
+      min = Math.min(min, nums[mid]);
+
+      if (nums[mid] >= nums[start]) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
+    }
+    return min;
 };
+
+// console.log(findMin([3,4,5,1,2]));
+// console.log(findMin([4,5,6,7,0,1,2]));
+// console.log(findMin([11,13,15,17]));
+console.log(findMin([18,13,15,17]));
