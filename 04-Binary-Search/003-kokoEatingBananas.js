@@ -28,22 +28,55 @@ Output: 23
  * @param {number} h
  * @return {number}
  */
-var minEatingSpeed = function(piles, h) {
-  //Input = array of numbers bananas, time limit in hours
-  //Output = rate of eating
+// var minEatingSpeed = function(piles, h) {
+//   //Input = array of numbers bananas, time limit in hours
+//   //Output = rate of eating
 
-  let [min, max] = [1, Math.max(...piles)]
-  while (min < max) {
-      let avgRate = ~~((min+max)/2);
-      let timeSpent = 0;
-      for (let i = 0; i < piles.length; i++) {
-          timeSpent += Math.ceil(piles[i]/avgRate);
-      }
-      if (timeSpent > h) {
-          min = avgRate + 1
-      } else if (timeSpent <= h) {
-          max = avgRate
-      }
-  }
-  return max
-};
+//   let [min, max] = [1, Math.max(...piles)]
+//   while (min < max) {
+//       let avgRate = ~~((min+max)/2);
+//       let timeSpent = 0;
+//       for (let i = 0; i < piles.length; i++) {
+//           timeSpent += Math.ceil(piles[i]/avgRate);
+//       }
+//       if (timeSpent > h) {
+//           min = avgRate + 1
+//       } else if (timeSpent <= h) {
+//           max = avgRate
+//       }
+//   }
+//   return max
+// };
+
+var minEatingSpeed = function(piles, h) {
+    //Input is piles of banana and time limit to each
+    //Output is how fast to eat piles per hour
+
+    //LOGIC
+    //Set a minimum rate and a maximum rate (max is max pile[i])
+    //Initialize time spent and increase timeframe iterating through piles
+    //If time > h, increase min to avg rate + 1
+    //If time < or equal to h, let the max be avg rate
+    let minimumRate = 1;
+    let maximumRate = Math.max(...piles);
+    let averageRate = Math.floor((maximumRate+minimumRate)/2);
+
+    while (minimumRate < maximumRate) {
+        let timeTaken = 0;
+        for (let i = 0; i < piles.length; i++) {
+            timeTaken += Math.ceil(piles[i]/averageRate);
+        }
+        if (timeTaken > h) {
+            minimumRate = averageRate + 1;
+        } else {
+            maximumRate = averageRate;
+        }
+        averageRate = Math.floor((maximumRate+minimumRate)/2);
+    }
+
+    return maximumRate;
+
+}
+
+console.log(minEatingSpeed([3,6,7,11], 8));
+console.log(minEatingSpeed([30,11,23,4,20], 5));
