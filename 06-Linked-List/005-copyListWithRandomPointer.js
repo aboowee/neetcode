@@ -55,5 +55,26 @@ Node.random is null or is pointing to some node in the linked list.
  * @return {Node}
  */
 var copyRandomList = function(head) {
+  //Input is a single linked list with nodes pointing to next and random node
+  //LOGIC
+    //iterate through initial list, create new node, save current node key: node, in a hashmap
+    //pass through and add pointers
 
+  let pointer = head;
+  let nodeTracker = new Map();
+
+  while (pointer) {
+    nodeTracker.set(pointer, new Node(pointer.val));
+    pointer = pointer.next;
+  }
+
+  pointer = head;
+
+  while (pointer) {
+    nodeTracker.get(pointer).next = nodeTracker.get(pointer.next);
+    nodeTracker.get(pointer).random = nodeTracker.get(pointer.random);
+    pointer = pointer.next;
+  }
+
+  return nodeTracker.get(head);
 };
