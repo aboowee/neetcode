@@ -56,41 +56,41 @@ var addTwoNumbers = function(l1, l2) {
     while (pointer1 || pointer2 || remainder) {
 
       if (pointer1 && pointer2) {
-        let sum = pointer1 + pointer2 + remainder;
+        let sum = pointer1.val + pointer2.val + remainder;
         if (sum >= 10) {
-          pointer.next = new ListNode(sum%10);
+          pointerSum.next = new ListNode(sum%10);
           remainder = 1;
         } else {
-          pointer.next = new ListNode(sum);
+          pointerSum.next = new ListNode(sum);
           remainder = 0;
         }
         pointer1 = pointer1.next;
         pointer2 = pointer2.next;
       } else if (pointer1) {
-        let sum = pointer1 + remainder;
+        let sum = pointer1.val + remainder;
         if (sum >= 10) {
-          pointer.next = new ListNode(sum%10);
+          pointerSum.next = new ListNode(sum%10);
           remainder = 1;
         } else {
-          pointer.next = new ListNode(sum);
+          pointerSum.next = new ListNode(sum);
           remainder = 0;
         }
         pointer1 = pointer1.next;
       } else if (pointer2) {
-        let sum = pointer2 + remainder;
+        let sum = pointer2.val + remainder;
         if (sum >= 10) {
-          pointer.next = new ListNode(sum%10);
+          pointerSum.next = new ListNode(sum%10);
           remainder = 1;
         } else {
-          pointer.next = new ListNode(sum);
+          pointerSum.next = new ListNode(sum);
           remainder = 0;
         }
         pointer2 = pointer2.next;
       } else {
-        pointer.next = new ListNode(remainder);
+        pointerSum.next = new ListNode(remainder);
         remainder = 0;
       }
-      pointer = pointer.next;
+      pointerSum = pointerSum.next;
     }
 
     return dummyNode.next;
