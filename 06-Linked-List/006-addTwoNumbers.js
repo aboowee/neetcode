@@ -95,3 +95,31 @@ var addTwoNumbers = function(l1, l2) {
 
     return dummyNode.next;
 };
+
+var addTwoNumbers = function(l1, l2) {
+
+  let remainder = 0;
+  let pointer1 = l1;
+  let pointer2 = l2;
+  let dummyNode = new ListNode();
+  let pointerSum = dummyNode;
+
+  while (pointer1 || pointer2 || remainder) {
+
+    let sum = (pointer1 ? pointer1.val : 0) + (pointer2 ? pointer2.val : 0) + remainder;
+    if (sum >= 10) {
+      pointerSum.next = new ListNode(sum%10);
+      remainder = 1;
+    } else {
+      pointerSum.next = new ListNode(sum);
+      remainder = 0;
+    }
+
+    pointer1 ? pointer1 = pointer1.next : null;
+    pointer2 ? pointer2 = pointer2.next : null;
+
+    pointerSum = pointerSum.next;
+  }
+
+  return dummyNode.next;
+};
