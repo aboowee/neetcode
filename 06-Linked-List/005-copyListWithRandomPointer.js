@@ -71,8 +71,8 @@ var copyRandomList = function(head) {
   pointer = head;
 
   while (pointer) {
-    nodeTracker.get(pointer).next = nodeTracker.get(pointer.next);
-    nodeTracker.get(pointer).random = nodeTracker.get(pointer.random);
+    nodeTracker.get(pointer).next = nodeTracker.get(pointer.next) || null;
+    nodeTracker.get(pointer).random = nodeTracker.get(pointer.random) || null;
     pointer = pointer.next;
   }
 
