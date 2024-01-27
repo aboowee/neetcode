@@ -40,5 +40,23 @@ The number of nodes in the tree is in the range [0, 5000].
  * @return {boolean}
  */
 var isBalanced = function(root) {
+  let currentDepth = 0;
+  let balanced = true;
 
+  function traversal(node, depth) {
+    if (!node) {
+      if (currentDepth === 0) {
+        currentDepth = depth - 1;
+      } else if (Math.abs((depth-1)-currentDepth) > 1) {
+        balanced = false;
+      }
+      return;
+    }
+    traversal(node.left, depth + 1);
+    traversal(node.right, depth + 1);
+  }
+
+  traversal(root, 1);
+
+  return balanced;
 };
