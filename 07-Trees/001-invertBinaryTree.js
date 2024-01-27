@@ -39,4 +39,19 @@ The number of nodes in the tree is in the range [0, 100].
  */
 var invertTree = function(root) {
 
+  //At node, have a temp variable, save left, swap left and right
+  //Call invertTree on new node
+  if (!root) {
+    return null;
+  }
+
+  let temp = root.left;
+  root.left = root.right;
+  root.right = temp;
+
+  invertTree(root.left);
+  invertTree(root.right);
+
+  return root;
+
 };
