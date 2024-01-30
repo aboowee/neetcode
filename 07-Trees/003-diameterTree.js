@@ -37,10 +37,16 @@ The number of nodes in the tree is in the range [1, 104].
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
+var diameterOfBinaryTree = function(root, depth = 0) {
   //LOGIC
-  //Check furthest left child
-  //Check furthest right child
-  //Add together and return
+  //Search left node's depth
+  //Search right node's depth
+  //Return both depths added
+
+  if (!root.left && !root.right) {
+    return depth;
+  }
+
+  return traversal(root.left, depth + 1) + traversal(root.right, depth + 1);
 
 };
