@@ -38,5 +38,9 @@ The number of nodes in the tree is in the range [1, 104].
  * @return {number}
  */
 var diameterOfBinaryTree = function(root) {
+  //LOGIC
+  //Check furthest left child
+  //Check furthest right child
+  //Add together and return
 
 };
