@@ -29,5 +29,8 @@ Output: -1
  * @return {number}
  */
 var search = function(nums, target) {
-
+  //LOGIC
+  //If end is greater than beginning, proceed with normal binary search
+  //If middle value is greater than beginning and target is within, search that
+  //Else search right and repeat
 };
