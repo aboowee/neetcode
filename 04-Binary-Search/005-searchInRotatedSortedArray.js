@@ -33,4 +33,22 @@ var search = function(nums, target) {
   //If end is greater than beginning, proceed with normal binary search
   //If middle value is greater than beginning and target is within, search that
   //Else search right and repeat
+  let start = 0;
+  let end = nums.length - 1;
+
+  while (start < end) {
+    let mid = ~~((start+end)/2);
+
+    if (nums[end] > nums[start]) {
+      if (nums[mid] === target) {
+        return mid;
+      } else if (nums[mid] > target) {
+        end = mid - 1;
+      } else {
+        start = mid + 1;
+      }
+    }
+  }
+
+  return -1;
 };
