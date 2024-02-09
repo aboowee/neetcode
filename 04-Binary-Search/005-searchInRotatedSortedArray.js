@@ -52,3 +52,5 @@ var search = function(nums, target) {
 
   return -1;
 };
+
+console.log(search([1,2,3,5,6,9], 6));
